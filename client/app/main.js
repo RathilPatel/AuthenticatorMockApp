@@ -29,14 +29,17 @@ Template.validator.onCreated(function helloOnCreated() {
 
 Template.validator.events({
   'submit .form' (event,TemplateInstance){
+    var log = document.getElementById("log-box");
     event.preventDefault();
     const target = event.target;
     var username = target.username.value;
     var web_token = target.web_token.value;
     username = "\"" + username + "\"";
     web_token = "\"" + web_token + "\"";
-    var user = Users.find({});
+    var user = Users.find({}).fetch();
 
+
+    log.value ="Entered CLick function"+user;
     console.log(" Test: "+JSON.stringify(user));
 
     user.forEach(element => {
@@ -55,6 +58,7 @@ Template.validator.events({
           var success_update = Users.update({_id: id} ,{ $set : { app_token : app } });
           // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
           console.log("-----------Updated Token:  "+success_update + "----: ");
+          log.value = log.value+"TOken Updated!!!";
 
 
 
@@ -65,6 +69,7 @@ Template.validator.events({
 
         } else {
           console.error("Web_token Didnt Match");
+          log.value = log.value+"Token Didnt Match";
           // break;
         }
       }
@@ -73,10 +78,15 @@ Template.validator.events({
         console.log(user.fetch());
         console.error("Deleting Obejct"+ Users.remove(JSON.stringify(element["_id"])));
        console.warn("USER NOT FOUND/Deleted");
+       log.value = log.value+"UsernOTFOund!!";
 
       }
+
+      log.value = log.value+"Inside the Loop!!";
       
     });
+
+    log.value = log.value+"    end of JS!!";
 
     console.log("after USer");
 

@@ -45,7 +45,7 @@ Template.Login.events({
         console.log(Users.find().fetch());
         if(success_update){
             target.web_token.value = token;
-            putwebdata(token);
+            // putwebdata(token);
         }
 
   }
@@ -90,6 +90,7 @@ Template.Login.events({
               }
               else{
                 console.log("Login Token Didnt Match");
+                console.log(JSON.stringify(element["app_token"]) +"========"+login__token);
                 document.getElementById("info-message").innerHTML = '<div class="oaerror danger" id="message"> <strong>Error</strong>- Invalid Token. Please try again.</div>'
               }
             }
