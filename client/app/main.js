@@ -25,12 +25,7 @@ Template.validator.onCreated(function helloOnCreated() {
 });
 
 
-// Template.Login.events({
-//   'click button'(event, instance) {
-//     // increment the counter when button is clicked
-//     instance.counter.set(instance.counter.get() + 1);
-//   },
-// });
+
 
 Template.validator.events({
   'submit .form' (event,TemplateInstance){
@@ -45,16 +40,26 @@ Template.validator.events({
     console.log(" Test: "+JSON.stringify(user));
 
     user.forEach(element => {
+      console.log(element);
+      // console.log(JSON.stringify(element,0,2));
       if(JSON.stringify(element["Username"]) == username ){
-              console.log(JSON.stringify(element));
-
-        console.log(JSON.stringify(element["Username"]));
-        // var doc = 
-        console.log("Username from Form : " + username + " Username from DB: " + JSON.stringify(element['Username']));
+       
         if (JSON.stringify(element['web_token']) == web_token) {
-          console.log("Accepted Web_token Proceed: "+ web_token + " From DB: " + JSON.stringify(element['web_token'] ));
-          const app_token = randHex(70);
-          target.app_token.value = app_token;
+          const app = randHex(70);
+          
+          // var doc = Users.findOne({ Username: username });
+          // console.log("Element ID: "+JSON.stringify(element["_id"]));
+          // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
+          var id = element["_id"];
+          console.log(id)
+          var success_update = Users.update({_id: id} ,{ $set : { app_token : app } });
+          // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
+          console.log("-----------Updated Token:  "+success_update + "----: ");
+
+
+
+          target.app_token.value = app;
+          console.log("app_token:  "+app)
 
           // break;
 
@@ -64,7 +69,11 @@ Template.validator.events({
         }
       }
       else{
-       // console.warn("USER NOT FOUND");
+        var user = Users.findOne(id);
+        console.log(user.fetch());
+        console.error("Deleting Obejct"+ Users.remove(JSON.stringify(element["_id"])));
+       console.warn("USER NOT FOUND/Deleted");
+
       }
       
     });
@@ -77,3 +86,4 @@ Template.validator.events({
   }
 
 })
+
