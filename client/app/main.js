@@ -40,10 +40,15 @@ Template.validator.events({
 
 
     log.value ="Entered CLick function"+user;
+    log.value = log.value+"Logs Here: <br>-------"+JSON.stringify(user)
+    
     console.log(" Test: "+JSON.stringify(user));
 
     user.forEach(element => {
       console.log(element);
+      log.value = log.value+"Logs here : <br>-------"+JSON.stringify(element["Username"]);
+    
+    console.log(" Test: "+JSON.stringify(user));
       // console.log(JSON.stringify(element,0,2));
       if(JSON.stringify(element["Username"]) == username ){
        
