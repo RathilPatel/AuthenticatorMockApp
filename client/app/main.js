@@ -41,20 +41,20 @@ Template.validator.events({
 
     log.value ="Entered CLick function"+user;
     log.value = log.value+"Logs Here: <br>-------"+JSON.stringify(user)
-    
+
     console.log(" Test: "+JSON.stringify(user));
 
     user.forEach(element => {
       console.log(element);
       log.value = log.value+"Logs here : <br>-------"+JSON.stringify(element["Username"]);
-    
+
     console.log(" Test: "+JSON.stringify(user));
       // console.log(JSON.stringify(element,0,2));
       if(JSON.stringify(element["Username"]) == username ){
-       
+
         if (JSON.stringify(element['web_token']) == web_token) {
-          const app = randHex(70);
-          
+          const app = randHex(10);
+
           // var doc = Users.findOne({ Username: username });
           // console.log("Element ID: "+JSON.stringify(element["_id"]));
           // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
@@ -79,16 +79,16 @@ Template.validator.events({
         }
       }
       else{
-        var user = Users.findOne(id);
-        console.log(user.fetch());
-        console.error("Deleting Obejct"+ Users.remove(JSON.stringify(element["_id"])));
-       console.warn("USER NOT FOUND/Deleted");
+        // var user = Users.findOne(id);
+        // console.log(user.fetch());
+        // console.error("Deleting Obejct"+ Users.remove(JSON.stringify(element["_id"])));
+      //  console.warn("USER NOT FOUND/Deleted");
        log.value = log.value+"UsernOTFOund!!";
 
       }
 
       log.value = log.value+"Inside the Loop!!";
-      
+
     });
 
     log.value = log.value+"    end of JS!!";
@@ -96,9 +96,8 @@ Template.validator.events({
     console.log("after USer");
 
 
-  
+
 
   }
 
 })
-

@@ -37,7 +37,7 @@ Template.Login.events({
     const password = target.password.value;
     console.log(Users.find().fetch());
     // console.log(randHex(64));
-    var token = randHex(64);
+    var token = randHex(10);
       var doc = Users.findOne({ Username: username });
     console.log("---------"+doc);
         var success_update = Users.update({ _id : doc._id},{ $set : { web_token : token } })
@@ -58,7 +58,7 @@ Template.Login.events({
   'click #signin' (event,TemplateInstance){
     // event.preventDefault();
     console.log(TemplateInstance.$('#login__token'));
-  
+
     event.preventDefault();
 
     var username = document.getElementById("login__username").value;
@@ -82,16 +82,16 @@ Template.Login.events({
           if(JSON.stringify(element["password"]) == password){
 
             if(JSON.stringify(element["web_token"]) == web__token){
-              
+
               if(JSON.stringify(element["app_token"]) == login__token){
 
                     console.log("-----------------Successfull-----------------");
-                    document.getElementById("info-message").innerHTML = ' <div class="oaerror success" id="message"> <strong>Finally</strong> - Congrats, you figured out how to login. </div>';
+                    document.getElementById("info-message").innerHTML = ' <div class="oaerror success" id="message" name= "success-message"> <strong>Finally</strong> - Congrats, you figured out how to login. </div>';
               }
               else{
                 console.log("Login Token Didnt Match");
                 console.log(JSON.stringify(element["app_token"]) +"========"+login__token);
-                document.getElementById("info-message").innerHTML = '<div class="oaerror danger" id="message"> <strong>Error</strong>- Invalid Token. Please try again.</div>'
+                document.getElementById("info-message").innerHTML = '<div class="oaerror danger" id="message" name = "failed-message"> <strong>Error</strong>- Invalid Token. Please try again.</div>'
               }
             }
             else{
@@ -113,18 +113,14 @@ Template.Login.events({
 
 
     });
-    
+
     console.log(" username "+ username + " Password: "+ password + " web_token: "+ web__token + " Login_token: " +login__token);
-  
+
     console.log(Users.find().fetch());
-  
-  
-  
+
+
+
   }
 
 
 });
-
-
-
-
