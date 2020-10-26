@@ -55,13 +55,10 @@ Template.validator.events({
         if (JSON.stringify(element['web_token']) == web_token) {
           const app = randHex(10);
 
-          // var doc = Users.findOne({ Username: username });
-          // console.log("Element ID: "+JSON.stringify(element["_id"]));
-          // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
+
           var id = element["_id"];
           console.log(id)
           var success_update = Users.update({_id: id} ,{ $set : { app_token : app } });
-          // console.log("Element app_token: "+JSON.stringify(element["app_token"]));
           console.log("-----------Updated Token:  "+success_update + "----: ");
           log.value = log.value+"TOken Updated!!!";
 
@@ -79,21 +76,14 @@ Template.validator.events({
         }
       }
       else{
-        // var user = Users.findOne(id);
-        // console.log(user.fetch());
-        // console.error("Deleting Obejct"+ Users.remove(JSON.stringify(element["_id"])));
-      //  console.warn("USER NOT FOUND/Deleted");
+
        log.value = log.value+"UsernOTFOund!!";
-
       }
-
       log.value = log.value+"Inside the Loop!!";
 
     });
 
     log.value = log.value+"    end of JS!!";
-
-    console.log("after USer");
 
 
 

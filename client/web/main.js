@@ -7,9 +7,6 @@ import { putwebdata } from '../app/temp'
 
 
 import './main.html';
-// console.log("IN Web Specific JS");
-
-// export const Users = new Mongo.Collection('user');
 
 var randHex = function(len) {
   var maxlen = 8,
@@ -45,7 +42,6 @@ Template.Login.events({
         console.log(Users.find().fetch());
         if(success_update){
             target.web_token.value = token;
-            // putwebdata(token);
         }
 
   }
@@ -108,7 +104,6 @@ Template.Login.events({
         }
         else{
           console.log("User Not found");
-          // document.getElementById("info-message").innerHTML = '<div class="oaerror danger"> <strong>Error</strong>- Invalid Token. Please try again.</div>'
         }
 
 
