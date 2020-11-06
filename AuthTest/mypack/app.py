@@ -1,18 +1,17 @@
 from appium import webdriver
-# from selenium import webdriver
 from appium.webdriver.common.mobileby import MobileBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests , time , os
 from browserstack.local import Local
 
-def App_token(token):
+def App_token():
     BROWSERSTACK_USERNAME = os.environ['BROWSERSTACK_USERNAME']
     BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY']
-
+    print("here")
     files = {
     # 'data': (None, '{"url": "https://www.browserstack.com/app-automate/sample-apps/android/WikipediaSample.apk","custom_id":"AndroidDemoApp"}'),
-    'file': ('/Users/rathilpatel/tmp/android/project/app/build/outputs/apk/debug/app-debug.apk', open('/Users/rathilpatel/tmp/android/project/app/build/outputs/apk/debug/app-debug.apk', 'rb')),
+    'file': ('./../app-debug.apk', open('./../app-debug.apk', 'rb')),
         'custom_id': (None, 'AuthMock'),
     }
 
@@ -33,26 +32,22 @@ def App_token(token):
     try:
         APP_driver = webdriver.Remote("http://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub", desired_caps)
         print("Started Test")
-        # print(driver.contexts)
+
         webview = APP_driver.contexts[1]
         APP_driver.switch_to.context(webview)
         time.sleep(5)
 
 
         Username = APP_driver.find_element_by_id("login__username")
-        # WebDriverWait(driver, 30).until(
-        # EC.element_to_be_clickable((MobileBy.ID, "login__username"))
-        # )   
+
         Username.send_keys("User1")
         print(APP_driver.current_activity)
 
         time.sleep(5)
 
-        web_token = APP_driver.find_element_by_id("web__token")
-        # WebDriverWait(driver, 30).until(
-        # EC.element_to_be_clickable((MobileBy.ID, "web__token"))
-        # )
-        web_token.send_keys(token)
+        web_token = APP_driver.find_element_by_id("password")
+ 
+        web_token.send_keys("test1")
         print(APP_driver.current_activity)
 
         time.sleep(5)
@@ -61,18 +56,10 @@ def App_token(token):
 
         time.sleep(5)
 
-        # gen_token =  driver.find_element_by_id("gen_token")
-        # # WebDriverWait(driver, 30).until(
-        # # EC.element_to_be_clickable((MobileBy.ID, "gen_token"))
-        # # )
-        # gen_token.click()
-        # print(driver.current_activity)
+
 
         login_token = APP_driver.find_element_by_id("login__token")
-        # WebDriverWait(driver, 30).until(
-        # EC.element_to_be_clickable((MobileBy.ID, "login__token"))
-        # )
-        # login_token.send_keys("Sample")
+
         time.sleep(5)
         token = login_token.get_attribute('value')
         print("Token Recieved: "+login_token.get_attribute('value'))

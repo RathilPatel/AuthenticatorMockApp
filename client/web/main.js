@@ -8,17 +8,17 @@ import { putwebdata } from '../app/temp'
 
 import './main.html';
 
-var randHex = function(len) {
-  var maxlen = 8,
-      min = Math.pow(16,Math.min(len,maxlen)-1)
-      max = Math.pow(16,Math.min(len,maxlen)) - 1,
-      n   = Math.floor( Math.random() * (max-min+1) ) + min,
-      r   = n.toString(16);
-  while ( r.length < len ) {
-     r = r + randHex( len - maxlen );
-  }
-  return r;
-};
+// var randHex = function(len) {
+//   var maxlen = 8,
+//       min = Math.pow(16,Math.min(len,maxlen)-1)
+//       max = Math.pow(16,Math.min(len,maxlen)) - 1,
+//       n   = Math.floor( Math.random() * (max-min+1) ) + min,
+//       r   = n.toString(16);
+//   while ( r.length < len ) {
+//      r = r + randHex( len - maxlen );
+//   }
+//   return r;
+// };
 
 Template.Login.onCreated(function helloOnCreated() {
 
@@ -34,15 +34,17 @@ Template.Login.events({
     const password = target.password.value;
     console.log(Users.find().fetch());
     // console.log(randHex(64));
-    var token = randHex(10);
+    // var token = randHex(10);
       var doc = Users.findOne({ Username: username });
-    console.log("---------"+doc);
-        var success_update = Users.update({ _id : doc._id},{ $set : { web_token : token } })
-        console.log(success_update);
-        console.log(Users.find().fetch());
-        if(success_update){
-            target.web_token.value = token;
-        }
+      console.log(username +" == "+ doc.Username +" && " + password +" == "+ doc.password);
+      if(username == doc.Username && password == doc.password){
+        console.log("here passed")
+        document.getElementById("login__token_label").removeAttribute("hidden")
+        document.getElementById("login__token").removeAttribute("hidden")
+        document.getElementById("signin").removeAttribute("hidden")
+
+      }
+
 
   }
 
@@ -59,11 +61,9 @@ Template.Login.events({
 
     var username = document.getElementById("login__username").value;
     var password = document.getElementById("login__password").value;
-    var web__token = document.getElementById("web__token").value;
     var login__token = document.getElementById("login__token").value;
     username = "\"" + username +"\"";
     password = "\"" + password + "\"";
-    web__token = "\"" + web__token + "\"";
     login__token = "\"" + login__token + "\"";
 
 
@@ -77,18 +77,11 @@ Template.Login.events({
 
           if(JSON.stringify(element["password"]) == password){
 
-            if(JSON.stringify(element["web_token"]) == web__token){
-
-              if(JSON.stringify(element["app_token"]) == login__token){
+            if(JSON.stringify(element["web_token"]) == login__token){
 
                     console.log("-----------------Successfull-----------------");
                     document.getElementById("info-message").innerHTML = ' <div class="oaerror success" id="message" name= "success-message"> <strong>Finally</strong> - Congrats, you figured out how to login. </div>';
-              }
-              else{
-                console.log("Login Token Didnt Match");
-                console.log(JSON.stringify(element["app_token"]) +"========"+login__token);
-                document.getElementById("info-message").innerHTML = '<div class="oaerror danger" id="message" name = "failed-message"> <strong>Error</strong>- Invalid Token. Please try again.</div>'
-              }
+              
             }
             else{
               console.log("Web_token didnt Match");
@@ -109,7 +102,7 @@ Template.Login.events({
 
     });
 
-    console.log(" username "+ username + " Password: "+ password + " web_token: "+ web__token + " Login_token: " +login__token);
+    // console.log(" username "+ username + " Password: "+ password + " web_token: "+ web__token + " Login_token: " +login__token);
 
     console.log(Users.find().fetch());
 

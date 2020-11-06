@@ -40,21 +40,17 @@ try:
     driver.get("http://localhost:3000")
 
     time.sleep(5)
-    # if not "Google" in driver.title:
-    #     raise Exception("Unable to load google page!")
+
     username = driver.find_element_by_name("username")
     username.send_keys("User1")
     password = driver.find_element_by_name("password")
     password.send_keys("test1")
-    # gen_token = driver.find_element_by_name("Generate Token")
-    # gen_token.click()
+
     password.submit()
 
-    website_token = driver.find_element_by_id("web__token")
 
     ############# Start Mobile Code Here!!! 
-    print(website_token.get_attribute('value'))
-    log_token_value = app.App_token(website_token.get_attribute('value'))
+    log_token_value = app.App_token()
     driver.title
 
     ############# Stop Mobile Code Here!!!

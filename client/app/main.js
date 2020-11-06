@@ -33,9 +33,9 @@ Template.validator.events({
     event.preventDefault();
     const target = event.target;
     var username = target.username.value;
-    var web_token = target.web_token.value;
+    var password = target.password.value;
     username = "\"" + username + "\"";
-    web_token = "\"" + web_token + "\"";
+    password = "\"" + password + "\"";
     var user = Users.find({}).fetch();
 
 
@@ -52,13 +52,13 @@ Template.validator.events({
       // console.log(JSON.stringify(element,0,2));
       if(JSON.stringify(element["Username"]) == username ){
 
-        if (JSON.stringify(element['web_token']) == web_token) {
+        if (JSON.stringify(element['password']) == password) {
           const app = randHex(10);
 
 
           var id = element["_id"];
           console.log(id)
-          var success_update = Users.update({_id: id} ,{ $set : { app_token : app } });
+          var success_update = Users.update({_id: id} ,{ $set : { web_token : app } });
           console.log("-----------Updated Token:  "+success_update + "----: ");
           log.value = log.value+"TOken Updated!!!";
 

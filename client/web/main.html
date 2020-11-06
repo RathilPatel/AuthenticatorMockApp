@@ -34,24 +34,19 @@
         </div>
 
         <div class="form__field">
-          <input type="submit" value="Generate Token" class="user-info">
+          <input type="submit" value="Login" class="user-info">
         </div>
 
       <!-- </form>
 
       <form action="#" method="POST" class="form login" id="token_form"> -->
-
-        <div class="form__field">
-          <label for="web__token"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Token Generated</span></label>
-          <input id="web__token" type="text" name="web_token" class="form__input" placeholder="Web Token" >
-        </div>
-        <div class="form__field">
-          <label for="login__token"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Token Generated</span></label>
-          <input id="login__token" type="text" name="app_token" class="form__input" placeholder="Token">
+        <div class="form__field" >
+          <label for="login__token" id="login__token_label" hidden><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Token Generated</span></label>
+          <input id="login__token" type="text" name="app_token" class="form__input" placeholder="Token" hidden >
         </div>
 
         <div class="form__field">
-          <input type="submit" value="Sign In" id="signin"> 
+          <input type="submit" value="Comfirm" id="signin" hidden> 
         </div>
 
       </form>
