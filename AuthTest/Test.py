@@ -70,8 +70,8 @@ try:
         driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"passed", "reason": "Login Success"}}')
     else:
         driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "Login Failure"}}')
-except:
-    print("Exception Occured!!!!!")
+except Exception as e:
+    print("Exception Occured!!!!!"+e)
     driver.execute_script('browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed", "reason": "Local Exception Occoured. Look for Possible Server Errors."}}')
 
 

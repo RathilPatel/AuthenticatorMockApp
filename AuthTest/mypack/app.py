@@ -5,14 +5,17 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import requests , time , os
 from browserstack.local import Local
+from pathlib import Path
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 def App_token(token):
     BROWSERSTACK_USERNAME = os.environ['BROWSERSTACK_USERNAME']
     BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY']
 
     files = {
-    # 'data': (None, '{"url": "https://www.browserstack.com/app-automate/sample-apps/android/WikipediaSample.apk","custom_id":"AndroidDemoApp"}'),
-    'file': ('/Users/rathilpatel/tmp/android/project/app/build/outputs/apk/debug/app-debug.apk', open('/Users/rathilpatel/tmp/android/project/app/build/outputs/apk/debug/app-debug.apk', 'rb')),
+    'data': (None, '{"url": "https://www.browserstack.com/app-automate/sample-apps/android/WikipediaSample.apk","custom_id":"AndroidDemoApp"}'),
+    'file': (BASE_DIR+'/app-debug.apk', open(BASE_DIR+'/app-debug.apk', 'rb')),
         'custom_id': (None, 'AuthMock'),
     }
 
@@ -26,6 +29,7 @@ def App_token(token):
     "name" : "Test",
     "app" : "AuthMock",
     "browserstack.local":"true",
+    "browserstack.networkLogs":"true",
 
     }
     
@@ -33,7 +37,7 @@ def App_token(token):
     try:
         APP_driver = webdriver.Remote("http://" + BROWSERSTACK_USERNAME + ":" + BROWSERSTACK_ACCESS_KEY + "@hub-cloud.browserstack.com/wd/hub", desired_caps)
         print("Started Test")
-        # print(driver.contexts)
+        print(APP_driver.contexts)
         webview = APP_driver.contexts[1]
         APP_driver.switch_to.context(webview)
         time.sleep(5)
@@ -61,12 +65,7 @@ def App_token(token):
 
         time.sleep(5)
 
-        # gen_token =  driver.find_element_by_id("gen_token")
-        # # WebDriverWait(driver, 30).until(
-        # # EC.element_to_be_clickable((MobileBy.ID, "gen_token"))
-        # # )
-        # gen_token.click()
-        # print(driver.current_activity)
+      
 
         login_token = APP_driver.find_element_by_id("login__token")
         # WebDriverWait(driver, 30).until(
