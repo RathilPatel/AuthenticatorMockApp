@@ -14,7 +14,7 @@ def App_token(token):
     BROWSERSTACK_ACCESS_KEY = os.environ['BROWSERSTACK_ACCESS_KEY']
 
     files = {
-    'data': (None, '{"url": "https://www.browserstack.com/app-automate/sample-apps/android/WikipediaSample.apk","custom_id":"AndroidDemoApp"}'),
+    # 'data': (None, '{"url": "https://www.browserstack.com/app-automate/sample-apps/android/WikipediaSample.apk","custom_id":"AndroidDemoApp"}'),
     'file': (BASE_DIR+'/app-debug.apk', open(BASE_DIR+'/app-debug.apk', 'rb')),
         'custom_id': (None, 'AuthMock'),
     }
