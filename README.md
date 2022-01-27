@@ -9,7 +9,7 @@ Test Syncronisation between Webapp and MobileApp with BrowserStack.
 * Clone the repo
 * Install [MeteorJS](https://www.meteor.com/developers/install)
 * Install dependencies `npm install`
-* Install dependencies `mvn compile`
+
 
 ### Start Local server
 
